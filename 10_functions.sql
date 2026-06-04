@@ -1,27 +1,21 @@
---1.
+-- 1. Vanzari anul curent
 CREATE OR REPLACE FUNCTION vanzari_anul_curent()
-RETURNS float AS $$
+RETURNS FLOAT AS $$
 DECLARE 
-	v_suma FLOAT;
+    v_suma FLOAT;
 BEGIN
-  
-    SELECT SUM(pc.pret*pc.cantitate) AS pret_total 
+    SELECT COALESCE(SUM(pc.pret * pc.cantitate),0)
     INTO v_suma
     FROM produse_comandate pc
     JOIN comanda co ON pc.id_comanda = co.id_comanda
-    WHERE EXTRACT (YEAR FROM co.data_creare) = EXTRACT(YEAR FROM NOW()); --- vanzarile din anul curent
+    WHERE EXTRACT(YEAR FROM co.data_creare) = EXTRACT(YEAR FROM NOW());
 
-RETURN v_suma;
+    RETURN v_suma;
 END;
 $$ LANGUAGE plpgsql;
 
---exemplu
-SELECT vanzari_anul_curent();
 
-
-
-
---2.
+-- 2. Total comenzi utilizator
 CREATE OR REPLACE FUNCTION total_comenzi_utilizator(p_id INT)
 RETURNS INT AS $$
 DECLARE
@@ -36,5 +30,23 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
---exemplu
-SELECT total_comenzi_utilizator(123);
+
+-- 3. Produse din categorie
+CREATE OR REPLACE FUNCTION produse_din_categorie(p_categorie_id INT)
+RETURNS TABLE(
+    id_produs BIGINT,
+    nume_produs VARCHAR(100),
+    pret NUMERIC(10,2),
+    stoc BIGINT
+)
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT p.id_produs,
+           p.nume_produs,
+           p.pret,
+           p.stoc
+    FROM produs p
+    WHERE p.categorie_id = p_categorie_id;
+END;
+$$ LANGUAGE plpgsql;
