@@ -1,15 +1,14 @@
-## Proiect pentru simularea unei baze de date de magazin online.
+Acest proiect reprezintă o bază de date pentru un magazin online, implementată în PostgreSQL.
 
-# Contine:
-- creare tabele si relatii
-- indexuri pentru optimizare
-- date de test
-- select-uri simple si join-uri
-- CTE-uri
-- view-uri si materialized view-uri
+Schema simulează un sistem simplu de e-commerce, cu entități precum utilizatori, produse, categorii și comenzi, conectate prin relații de tip primary key / foreign key.
 
-# Tehnologii folosite:
-- PostgreSQL Query Language
+În cadrul proiectului am implementat:
+- crearea tabelelor și definirea relațiilor dintre ele
+- constrângeri (PK, FK, CHECK, UNIQUE)
+- indexuri pentru optimizarea interogărilor
+- date de test pentru simularea scenariilor reale
+- interogări SQL (SELECT, JOIN, agregări)
+- exemple de interogări mai avansate folosind CTE
+- view-uri și materialized view-uri pentru analize și raportări
 
-# Scopul proiectului:
-- Aplicarea conceptelor de modelare relationala, interogari complexe si optimizare SQL.
+Scopul proiectului a fost aplicarea conceptelor de modelare relațională, scriere de interogări complexe și optimizarea performanței în PostgreSQL.
