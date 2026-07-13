@@ -9,6 +9,7 @@ CREATE EXTENSION IF NOT EXISTS postgres_fdw;
 --s-a creat extensia de postgres necesara conectarii tabelelor intre baze
 --postgres are mai multe extensii care ofera functionalitati diferite, "postgres_fdw" permite de exemplu conectarea unei alte baze Postgres la baza curenta
 
+--VEZI: https://github.com/alexandra-aron/curier_DB
 CREATE SERVER curier_server --numele obiectului de tip server
 FOREIGN DATA WRAPPER postgres_fdw --extensia folosita pentru conectare
 OPTIONS (
